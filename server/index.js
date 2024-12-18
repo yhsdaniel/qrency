@@ -6,15 +6,26 @@ const require = createRequire(import.meta.url)
 require('dotenv').config()
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const API_KEY = process.env.API_KEY
 
 // Enable CORS for all routes
 app.use(cors());
 
+// app.use((req, res, next) => {
+//     const allowedIP = "0.0.0.0"; // Replace with your allowed IP
+//     const requestIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+
+//     if (requestIP !== allowedIP) {
+//         res.status(403).json({ error: "Access denied" });
+//         return;
+//     }
+//     next();
+// })
+
 // Basic root route
 app.get('/currencies', async (req, res) => {
     try {
-        const response = await fetch(`https://api.currencybeacon.com/v1/currencies?api_key=${process.env.API_KEY}`)
+        const response = await fetch(`https://api.currencybeacon.com/v1/currencies?api_key=${API_KEY}`)
         const curr = await response.json()
         res.json(curr)
     } catch (error) {
@@ -24,9 +35,9 @@ app.get('/currencies', async (req, res) => {
 
 app.post('/convert', async (req, res) => {
     const { base, foreign, amount } = req.query
-    
+
     try {
-        const response = await fetch(`https://api.currencybeacon.com/v1/convert?api_key=${process.env.API_KEY}&from=${base}&to=${foreign}&amount=${amount}`)
+        const response = await fetch(`https://api.currencybeacon.com/v1/convert?api_key=${API_KEY}&from=${base}&to=${foreign}&amount=${amount}`)
         const convertCurr = await response.json()
         res.json(convertCurr.response)
     } catch (error) {
@@ -35,6 +46,7 @@ app.post('/convert', async (req, res) => {
 })
 
 // Start the server
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
 });
