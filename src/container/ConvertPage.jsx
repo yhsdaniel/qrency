@@ -1,9 +1,10 @@
 'use client'
 
-import ReactFlagsSelect from "react-flags-select";
 import { Field, Input, Label } from '@headlessui/react'
 import clsx from 'clsx'
-import SearchInput from '../components/SearchInput';
+import { Suspense, lazy } from "react";
+
+const SearchInput = lazy(() => import('../components/SearchInput'))
 
 export default function ConvertPage({
     data,
@@ -18,7 +19,7 @@ export default function ConvertPage({
 }) {
     return (
         <div className="w-full mb-10 md:px-12 flex flex-col items-center justify-center">
-            <h1 className="text-balance my-6 text-2xl font-semibold tracking-tight text-gray-900">
+            <h1 className="text-balance my-6 text-xl font-bold text-gray-900">
                 Converting Currency
             </h1>
             <div className="w-full text-left flex flex-col justify-center items-center">
@@ -39,11 +40,13 @@ export default function ConvertPage({
                 </Field>
                 <Field className='my-4 w-full'>
                     <Label className="text-sm/6 font-medium text-black">Base Currency</Label>
-                    <SearchInput
-                        currency={selectedBase}
-                        data={data}
-                        onSelection={setSelectedBase}
-                    />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <SearchInput
+                            currency={selectedBase}
+                            data={data}
+                            onSelection={setSelectedBase}
+                        />
+                    </Suspense>
                 </Field>
                 <button type="button" onClick={swapCurrency}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-gray-500 hover:text-black duration-100 ease-linear">
@@ -52,11 +55,13 @@ export default function ConvertPage({
                 </button>
                 <Field className='my-4 w-full'>
                     <Label className="text-sm/6 font-medium text-black">Foreign Currency</Label>
-                    <SearchInput
-                        currency={selectedForeign}
-                        data={data}
-                        onSelection={setSelectedForeign}
-                    />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <SearchInput
+                            currency={selectedForeign}
+                            data={data}
+                            onSelection={setSelectedForeign}
+                        />
+                    </Suspense>
                 </Field>
             </div>
             <button

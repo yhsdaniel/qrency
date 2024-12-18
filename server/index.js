@@ -10,16 +10,9 @@ const API_KEY = process.env.API_KEY
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: '*',
+    origin: ['http://localhost:5173', 'https://qrency.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Allow specific HTTP methods
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow specific headers
-    next();
-});
 
 // Basic root route
 app.get('/currencies', async (req, res) => {

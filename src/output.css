@@ -674,6 +674,14 @@ video {
   justify-content: space-between;
 }
 
+.gap-4{
+  gap: 1rem;
+}
+
+.gap-8{
+  gap: 2rem;
+}
+
 .overflow-auto{
   overflow: auto;
 }
@@ -812,6 +820,10 @@ video {
   font-weight: 600;
 }
 
+.font-bold{
+  font-weight: 700;
+}
+
 .tracking-tight{
   letter-spacing: -0.025em;
 }
@@ -895,6 +907,11 @@ video {
 }
 
 @media (min-width: 1024px){
+  .lg\:mx-\[15\%\]{
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+
   .lg\:flex-1{
     flex: 1 1 0%;
   }

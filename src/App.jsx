@@ -1,10 +1,10 @@
 import './App.css'
 import ConvertPage from './container/ConvertPage'
-import ResultPage from './container/ResultPage'
 import Header from './components/Header'
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import axios from 'axios'
 
+const ResultPage = lazy(() => import('./container/ResultPage'))
 const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:8080'
 
 const initialCurrency = [
@@ -77,7 +77,7 @@ function App() {
 	return (
 		<>
 			<Header />
-			<div className='mx-[10%] md:mx-[15%] py-4 flex flex-col md:flex-row justify-center items-center'>
+			<div className='mx-[10%] lg:mx-[15%] py-4 flex flex-col md:flex-row justify-center items-center gap-8'>
 				<ConvertPage
 					data={data}
 					amount={amount}
@@ -89,11 +89,13 @@ function App() {
 					handleConversion={handleConversion}
 					swapCurrency={handleSwapCurrency}
 				/>
-				<ResultPage 
-					result={result}
-					loading={loading}
-					setLoading={setLoading}
-				/>
+				<Suspense fallback={<div>Loading...</div>}>
+					<ResultPage
+						result={result}
+						loading={loading}
+						setLoading={setLoading}
+					/>
+				</Suspense>
 			</div>
 		</>
 	)
