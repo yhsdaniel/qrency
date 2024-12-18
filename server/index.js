@@ -9,7 +9,10 @@ const app = express();
 const API_KEY = process.env.API_KEY
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
