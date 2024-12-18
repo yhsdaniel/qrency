@@ -10,7 +10,7 @@ const API_KEY = process.env.API_KEY
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://qrency.vercel.app'],
+    origin: ['http://localhost:5173', 'https://qrency.vercel.app'], 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
