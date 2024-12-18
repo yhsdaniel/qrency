@@ -6,6 +6,7 @@ const require = createRequire(import.meta.url)
 require('dotenv').config()
 
 const app = express();
+app.use(express.json())
 const API_KEY = process.env.API_KEY
 
 // Enable CORS for all routes
@@ -15,7 +16,7 @@ app.use(cors({
 }));
 
 // Basic root route
-app.get('/currencies', async (req, res) => {
+app.get('/api/currencies', async (req, res) => {
     try {
         const response = await fetch(`https://api.currencybeacon.com/v1/currencies?api_key=${API_KEY}`)
         const curr = await response.json()
@@ -25,7 +26,7 @@ app.get('/currencies', async (req, res) => {
     }
 });
 
-app.post('/convert', async (req, res) => {
+app.post('/api/convert', async (req, res) => {
     const { base, foreign, amount } = req.query
 
     try {
