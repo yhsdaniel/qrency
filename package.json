@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "server": "cd ./server && nodemon index.js",
+    "server": "cd ./api && nodemon server.js",
     "client": "vite",
     "dev": "npm-run-all --parallel server client",
     "build": "vite build",

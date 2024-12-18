@@ -1,20 +1,20 @@
 {
     "version": 2,
-    "builds": [
-      {
-        "src": "/src/package.json",
-        "use": "@vercel/react"
-      },
-      {
-        "src": "server/index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/server/index.js"
-      }
+    "projects": [
+        {
+        "src": "src",
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist",
+        "framework": "vite"
+        },
+        {
+            "src": "./api",
+            "functions": {
+              "server.js": {
+                "runtime": "nodejs14.x"
+              }
+            }
+        }
     ]
   }
   
