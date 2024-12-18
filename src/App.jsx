@@ -77,7 +77,7 @@ function App() {
 	return (
 		<>
 			<Header />
-			<div className='mx-[10%] lg:mx-[15%] py-4 flex flex-col md:flex-row justify-center items-center gap-8'>
+			<div className='mx-[10%] xl:mx-[15%] py-4 flex flex-col md:flex-row justify-center items-center gap-8'>
 				<ConvertPage
 					data={data}
 					amount={amount}

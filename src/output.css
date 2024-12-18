@@ -921,3 +921,10 @@ video {
     padding-right: 2rem;
   }
 }
+
+@media (min-width: 1280px){
+  .xl\:mx-\[15\%\]{
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
