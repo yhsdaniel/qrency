@@ -5,7 +5,7 @@ import { Suspense, lazy, useEffect, useState } from 'react'
 import axios from 'axios'
 
 const ResultPage = lazy(() => import('./container/ResultPage'))
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
 const initialCurrency = [
 	{
@@ -33,7 +33,7 @@ function App() {
 
 	const fetchAPI = async () => {
 		try {
-			const res = await axios.get(`${API_URL}/currencies`)
+			const res = await axios.get(`${API_URL}/api/currencies`)
 			setData(Object.values(res.data))
 		} catch (error) {
 			console.error(error)
@@ -54,7 +54,7 @@ function App() {
 		const foreign = selectedForeign.short_code.toUpperCase()
 		try {
 			setLoading(true)
-			const res = await axios.post(`${API_URL}/convert?base=${base}&foreign=${foreign}&amount=${amount}`)
+			const res = await axios.post(`${API_URL}/api/convert?base=${base}&foreign=${foreign}&amount=${amount}`)
 			setResult(
 				{
 					amount: amount,
