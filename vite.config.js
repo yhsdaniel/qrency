@@ -5,7 +5,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    minify: 'esbuild',
-    outDir: 'dist',
-  }
+    outDir: 'dist', // Output directory for build
+  },
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8080', // Proxy API calls during development
+    },
+  },
 })

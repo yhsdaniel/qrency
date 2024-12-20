@@ -1,9 +1,18 @@
-{ 
-  "version": 2, 
-  "rewrites": [
-    { 
-      "source": "/(.*)", 
-      "destination": "/api" 
+{
+  "projects": [
+    {
+      "src": "src/",
+      "use": "@vercel/static-build",
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist"
+    },
+    {
+      "src": "api/",
+      "use": "@vercel/node"
     }
-  ] 
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/server.js" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
 }
