@@ -1,20 +1,23 @@
-import { createRequire } from 'module'
 import express from 'express'
 import cors from 'cors'
+import dotenv from 'dotenv'
 
-const require = createRequire(import.meta.url)
-require('dotenv').config()
+dotenv.config()
 
 const app = express();
-app.use(express.json())
 const API_KEY = process.env.API_KEY
+
+app.use(express.json())
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:5173', 'https://qrency.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
+    origin: ['http://localhost:5173', 'https://qrency.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
+
+app.get('/', (req, res) => {
+    res.send({ message: 'Hello world!' });
+})
 
 // Basic root route
 app.get('/api/currencies', async (req, res) => {
@@ -44,3 +47,5 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
 });
+
+export default app
