@@ -2,6 +2,7 @@ import express, { urlencoded, json } from 'express'
 import { createServer } from 'http'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import path from 'path'
 
 dotenv.config()
 
@@ -14,7 +15,8 @@ app.use(urlencoded({
 }))
 app.use(json())
 
-app.use(express.static(path.join(__dirname, '../dist')))
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+app.use(express.static(path.join(__dirname, '../../dist')))
 
 // Enable CORS for all routes
 app.use(cors({
