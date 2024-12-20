@@ -1,17 +1,23 @@
-import express from 'express'
+import express, { urlencoded, json } from 'express'
+import { createServer } from 'http'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 const app = express();
+const server = createServer(app)
 const API_KEY = process.env.API_KEY
 
-app.use(express.json())
+app.use(urlencoded({
+    extended: true
+}))
+app.use(json())
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://qrency.vercel.app', 'https://qrency-server.vercel.app'],
+    origin: ['https://qrency.vercel.app', 'http://localhost:5173'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
@@ -44,7 +50,7 @@ app.post('/api/convert', async (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, "0.0.0.0", () => {
+server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
 
