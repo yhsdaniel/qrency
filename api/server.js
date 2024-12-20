@@ -15,9 +15,6 @@ app.use(urlencoded({
 }))
 app.use(json())
 
-// const __dirname = path.dirname(new URL(import.meta.url).pathname);
-// app.use(express.static(path.join(__dirname, '../../dist')))
-
 // Enable CORS for all routes
 app.use(cors({
     origin: ['https://qrency.vercel.app', 'http://localhost:5173'],
