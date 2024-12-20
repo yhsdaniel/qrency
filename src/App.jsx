@@ -5,7 +5,7 @@ import { Suspense, lazy, useEffect, useState } from 'react'
 import axios from 'axios'
 
 const ResultPage = lazy(() => import('./container/ResultPage'))
-const API_URL = import.meta.env.VITE_API_URL || 'https://localhost:8080'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
 const initialCurrency = [
 	{
