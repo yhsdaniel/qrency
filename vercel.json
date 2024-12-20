@@ -1,13 +1,14 @@
 {
-  "projects": [
+  "builds": [
     {
-      "src": "src/",
+      "src": "src/**/*",
       "use": "@vercel/static-build",
-      "buildCommand": "npm run build",
-      "outputDirectory": "dist"
+      "config": {
+        "distDir": "dist"
+      }
     },
     {
-      "src": "api/",
+      "src": "api/*.js",
       "use": "@vercel/node"
     }
   ],
