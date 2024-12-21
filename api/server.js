@@ -19,7 +19,7 @@ app.use(json())
 app.use(cors({
     origin: ['https://qrency.vercel.app', 'http://localhost:5173'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE']
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
 app.get('/', (req, res) => {
