@@ -18,7 +18,7 @@ app.use(json())
 // Enable CORS for all routes
 app.use(cors({
     origin: ['https://qrency.vercel.app', 'http://localhost:5173'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'application/javascript'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
