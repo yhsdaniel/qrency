@@ -4,7 +4,7 @@ import { Field, Input, Label } from '@headlessui/react'
 import clsx from 'clsx'
 import { Suspense, lazy } from "react";
 
-const SearchInput = lazy(() => import('../components/SearchInput'))
+const Convert = lazy(() => import('./Convert'))
 
 export default function ConvertPage({
     data,
@@ -15,7 +15,10 @@ export default function ConvertPage({
     setSelectedForeign,
     swapCurrency,
     handleChangeAmount,
-    handleConversion
+    handleConversion,
+    query,
+    setSearchQuery,
+    searchQuery
 }) {
     return (
         <div className="w-full mb-10 md:px-12 flex flex-col items-center justify-center">
@@ -41,10 +44,13 @@ export default function ConvertPage({
                 <Field className='my-4 w-full'>
                     <Label className="text-sm/6 font-medium text-black">Base Currency</Label>
                     <Suspense fallback={<div>Loading...</div>}>
-                        <SearchInput
+                        <Convert
                             currency={selectedBase}
                             data={data}
                             onSelection={setSelectedBase}
+                            query={query}
+                            setSearchQuery={setSearchQuery}
+                            searchQuery={searchQuery}
                         />
                     </Suspense>
                 </Field>
@@ -56,10 +62,13 @@ export default function ConvertPage({
                 <Field className='my-4 w-full'>
                     <Label className="text-sm/6 font-medium text-black">Foreign Currency</Label>
                     <Suspense fallback={<div>Loading...</div>}>
-                        <SearchInput
+                        <Convert
                             currency={selectedForeign}
                             data={data}
                             onSelection={setSelectedForeign}
+                            query={query}
+                            setSearchQuery={setSearchQuery}
+                            searchQuery={searchQuery}
                         />
                     </Suspense>
                 </Field>

@@ -1,45 +1,23 @@
-import React, { useState } from 'react'
-import Currency from './Currency'
+import React from 'react'
 
-export default function SearchInput({ currency, data, onSelection }) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const handleToggleInput = () => {
-    setIsOpen((prev) => !prev)
-  }
-
-  const handleSelection = (currencyItem) => {
-    onSelection(data.find(ids => ids.id === currencyItem.id))
-    setIsOpen(true)
-  }
-
-  return (
-    <>
-      <button
-        type='button'
-        role='combobox'
-        aria-haspopup={true}
-        aria-expanded={isOpen}
-        onClick={handleToggleInput}
-        className='relative w-full bg-gray-50 border border-gray-400 rounded-2xl'
-      >
-        <Currency key={data.id} currency={currency} />
-        {isOpen &&
-          <ul className='absolute bg-white border border-gray-300 max-h-52 w-full z-20 overflow-auto'>
-            {data?.map((currencyItem) => (
-              <li
-                role='option'
-                key={currencyItem.id}
-                aria-selected={currencyItem.id === currency.id}
-              >
-                <button type="button" className='w-full' onClick={() => handleSelection(currencyItem)}>
-                  <Currency currency={currencyItem} />
-                </button>
-              </li>
-            ))}
-          </ul>
-        }
-      </button>
-    </>
-  )
+export default function SearchInput({ query, onSearch }) {
+    const handleSearchChange = (e) => {
+        const value = e.target.value
+        onSearch(value)
+    }
+    return (
+        <div className='w-full py-2 px-4 flex justify-start items-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 text-gray-400">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            <input
+                type="search"
+                name="search"
+                value={query}
+                placeholder='Currency of Country'
+                className='px-2 text-base outline-none w-full'
+                onChange={handleSearchChange}
+            />
+        </div>
+    )
 }

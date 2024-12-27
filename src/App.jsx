@@ -1,11 +1,10 @@
 import './App.css'
-import ConvertPage from './container/ConvertPage'
 import Header from './components/Header'
 import { Suspense, lazy, useEffect, useState } from 'react'
 import axios from 'axios'
 
 const ResultPage = lazy(() => import('./container/ResultPage'))
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+const ConvertPage = lazy(() => import('./container/ConvertPage'))
 
 const initialCurrency = [
 	{
@@ -26,6 +25,8 @@ function App() {
 	const [data, setData] = useState([])
 	const [result, setResult] = useState({})
 	const [loading, setLoading] = useState(false)
+	const [searchQuery, setSearchQuery] = useState("")
+	const [searchResult, setSearchResult] = useState({})
 
 	const [amount, setAmount] = useState(100)
 	const [selectedBase, setSelectedBase] = useState(initialCurrency.at(0));
@@ -70,6 +71,12 @@ function App() {
 		}
 	}
 
+	const handleSearchChange = (query) => {
+		let results = data.filter(item => item.name?.toLowerCase().includes(query.toLowerCase()) || item.short_code?.toLowerCase().includes(query.toLowerCase()))
+		setSearchQuery(query)
+		setSearchResult(results)
+	}
+
 	useEffect(() => {
 		Promise.all([handleConversion(), fetchAPI()])
 	}, [])
@@ -79,7 +86,7 @@ function App() {
 			<Header />
 			<div className='mx-[10%] xl:mx-[15%] py-4 flex flex-col md:flex-row justify-center items-center gap-8'>
 				<ConvertPage
-					data={data}
+					data={searchQuery ? searchResult : data}
 					amount={amount}
 					selectedBase={selectedBase}
 					setSelectedBase={setSelectedBase}
@@ -88,6 +95,9 @@ function App() {
 					handleChangeAmount={handleChangeAmount}
 					handleConversion={handleConversion}
 					swapCurrency={handleSwapCurrency}
+					query={searchQuery}
+					setSearchQuery={setSearchQuery}
+					searchQuery={handleSearchChange}
 				/>
 				<Suspense fallback={<div>Loading...</div>}>
 					<ResultPage
