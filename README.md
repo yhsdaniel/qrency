@@ -1,6 +1,6 @@
 **Qrency** (Website Currency Converting)
 
-This website provides a currency converting in the world
+This website provides a currency converting.
 
 Tech stack I use :
 1. ReactJS
