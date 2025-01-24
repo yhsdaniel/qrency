@@ -1,4 +1,4 @@
-Qrency (Website Currency Converting)
+**Qrency** (Website Currency Converting)
 
 This website provides a currency converting in the world
 
